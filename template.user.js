@@ -50,14 +50,14 @@ const addStyles = (css) => {
 
 function waitForElement(selector) {
   return new Promise((resolve) => {
-    const element = document.querySelector(selector);
+    const element = select(selector);
     if (element) {
       resolve(element);
       return;
     }
 
     const observer = new MutationObserver(() => {
-      const element = document.querySelector(selector);
+      const element = select(selector);
       if (element) {
         resolve(element);
         observer.disconnect();
