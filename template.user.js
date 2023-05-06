@@ -48,9 +48,27 @@ const addStyles = (css) => {
   document.documentElement.appendChild(style);
 };
 
-const main = () => {
-  
+function waitForElement(selector) {
+  return new Promise((resolve) => {
+    const element = document.querySelector(selector);
+    if (element) {
+      resolve(element);
+      return;
+    }
+
+    const observer = new MutationObserver(() => {
+      const element = document.querySelector(selector);
+      if (element) {
+        resolve(element);
+        observer.disconnect();
+      }
+    });
+
+    observer.observe(document.body, config);
+  });
 }
+
+const main = () => {};
 
 const run = () => {
   addStyles(styles.styleEle);
